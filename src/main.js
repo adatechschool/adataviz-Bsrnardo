@@ -1,54 +1,39 @@
+import { nettoyageTechnique } from "./utils.js";
 
 const cards = document.querySelector(".cards");
+
+// Ici va la data recuperée
+let toutesLesOeuvres = [];
+
+const afficherOeuvres = (oeuvres) => {
+  cards.innerHTML = ""; // Pour nettoyer chaque fois qu'on filtre
+
+  oeuvres.forEach((oeuvre) => {
+    const technique = nettoyageTechnique(oeuvre.technique, oeuvre.domaine);
+    const card = `
+      <div class="card">
+        <h3>${oeuvre.titre}</h3>
+        <p>${oeuvre.auteur}</p>
+        <p>${oeuvre.date_creation}</p>
+        <p>${oeuvre.domaine}</p>
+        <p>${technique}</p>
+      </div>
+    `;
+    cards.insertAdjacentHTML("beforeend", card);
+  });
+};
 
 const recuperationDonnees = async () => {
   try {
     const response = await fetch(
-      "https://data.nantesmetropole.fr/api/explore/v2.1/catalog/datasets/244400404_inventaire-collections-musee-arts-nantes/records?limit=20");
+      "https://data.nantesmetropole.fr/api/explore/v2.1/catalog/datasets/244400404_inventaire-collections-musee-arts-nantes/records?limit=20",
+    );
     const data = await response.json();
-    data.results.forEach((oeuvres) => {
-      console.log(oeuvres);
-      const card = `
-    <div class="card">
-      <h3>${oeuvres.titre}</h3>
-      <p>${oeuvres.auteur}</p>
-      <p>${oeuvres.date_creation}</p>
-      <p>${oeuvres.domaine}</p>
-      <p>${oeuvres.technique}</p>
-    </div>
-  `;
-      cards.insertAdjacentHTML("beforeend", card);
-    });
+    console.log("L'ARRAY DES OEUVRES:", data.results);
+    toutesLesOeuvres = data.results;
+    afficherOeuvres(toutesLesOeuvres);
   } catch (erreur) {
     console.error(erreur.message);
   }
 };
-
-
-
 recuperationDonnees();
-
-// fetch("https://data.nantesmetropole.fr/api/explore/v2.1/catalog/datasets/244400404_inventaire-collections-musee-arts-nantes/records?limit=20")
-//   .then(response => response.json())
-//   .then((data) => {
-//     console.log(data);
-//     data.results.forEach((oeuvre) => {
-//       console.log(oeuvre)
-//       insertCard(oeuvre);
-//     });
-//   })
-
-// const list = document.querySelector(".list");
-
-// const insertCard = (oeuvre) => {
-//   const card = `
-//     <div class="card">
-//       <h3>${oeuvre.titre}</h3>
-//       <p>${oeuvre.auteur}</p>
-//       <p>${oeuvre.date_creation}</p>
-//       <p>${oeuvre.domaine}</p>
-//       <p>${oeuvre.technique}</p>
-//     </div>
-//   `;
-//   list.insertAdjacentHTML("beforeend", card);
-// };
