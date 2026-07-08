@@ -1,0 +1,183 @@
+:root {
+  --prussian: rgb(1, 25, 54);
+  --lavender: rgb(245, 245, 247);
+  --gold: rgb(255, 217, 47);
+
+
+  --shadow:
+  2px 4px 6px -3px rgba(0, 0, 0, 0.1),
+  1px 6px 8px -6px rgba(0, 0, 0, 0.05);
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+
+  background-color: rgb(252, 252, 254);
+  color: var(--prussian);
+
+  font-size: 18px;
+  line-height: 1.45;
+  letter-spacing: 0.18px;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (max-width: 1024px) {
+  body {
+    font-size: 1rem;
+  }
+}
+
+/* ==========================
+   BARRE
+========================== */
+
+.barre {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0rem 2rem 0.25rem 2rem;
+}
+
+.logo {
+  height: 70px;
+  width: auto;
+  display: block;
+}
+
+/* ==========================
+   HEADER
+========================== */
+
+.hero {
+  padding: 1rem;
+  padding-top: 0rem;
+  padding-left: 1.8rem;
+}
+
+.entete {
+  margin: 0;
+  margin-top: 0;
+  font-family: "Roboto Slab", serif;
+  font-optical-sizing: auto;
+  font-size: 3rem;
+  font-weight: 600;
+  line-height: 3.25rem;
+  color: var(--prussian);
+}
+
+/* ==========================
+   FILTRES
+========================== */
+
+.filtres {
+  width: 100%;
+  background-color: var(--gold);
+  color: var(--lavender);
+  padding: 1.5rem 2rem;
+  box-shadow: var(--shadow);
+}
+
+.filtres h2 {
+  margin: 0;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+/* ==========================
+   GRID
+========================== */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  padding: 1.5rem;
+}
+
+/* ==========================
+   CARDS
+========================== */
+
+.card {
+  background-color: var(--lavender);
+  box-shadow: var(--shadow);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  font-family: "JetBrains Mono", monospace;
+  gap: 4px;
+  border-left: 3px solid var(--prussian);
+}
+
+.card h3 {
+  margin: 0;
+  margin-bottom: 1rem;
+  color: var(--prussian);
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.card p {
+  margin: 0;
+  color: var(--prussian);
+  font-size: 0.8rem;
+  line-height: 1;
+}
+
+.card p:first-of-type {
+  font-weight: 600;
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media (max-width: 480px) {
+  .barre,
+  .hero,
+  .filtres {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .logo {
+    height: 55px;
+  }
+
+  .entete {
+    font-size: 3rem;
+  }
+
+  .list {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+  }
+}
+
+/* ==========================
+   DARK MODE
+========================== */
+
+@media (prefers-color-scheme: dark) {
+  #social .button-icon {
+    filter: invert(1) brightness(2);
+  }
+}
