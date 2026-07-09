@@ -71,10 +71,10 @@ body {
 .entete {
   margin: 0;
   margin-top: 0;
-  font-family: "Roboto Slab", serif;
+  font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
   font-size: 3rem;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 3.25rem;
   color: var(--prussian);
 }
