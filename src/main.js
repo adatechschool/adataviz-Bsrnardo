@@ -1,9 +1,36 @@
-import { nettoyageTechnique } from "./utils.js";
+import { nettoyageTechnique, getTechniques, getDomaines } from "./utils.js";
 
 const cards = document.querySelector(".cards");
+const filtreDomaine = document.querySelector("#filtre-domaine");
+const filtreTechnique = document.querySelector("#filtre-technique");
 
 // Je dois créer un objet/array pour mettre les donées
 let toutesLesOeuvres = [];
+
+const remplirSelect = (select, valeurs) => {
+  valeurs.forEach((valeur) => {
+    const option = document.createElement("option");
+
+    option.value = valeur;
+
+    const texte =
+      valeur.length > 40 ? valeur.slice(0, 40) + "..." : valeur;
+
+    option.textContent = texte;
+
+    select.appendChild(option);
+  });
+};
+
+const initialiserPage = () => {
+  const domaines = getDomaines(toutesLesOeuvres);
+  const techniques = getTechniques(toutesLesOeuvres);
+
+  remplirSelect(filtreDomaine, domaines);
+  remplirSelect(filtreTechnique, techniques);
+
+  afficherOeuvres(toutesLesOeuvres);
+};
 
 const recuperationDonnees = async () => {
   try {
@@ -13,13 +40,12 @@ const recuperationDonnees = async () => {
     const data = await response.json();
     console.log("L'ARRAY DES OEUVRES:", data.results);
     toutesLesOeuvres = data.results;
-    afficherOeuvres(toutesLesOeuvres);
+    initialiserPage();
   } catch (erreur) {
     console.error(erreur.message);
   }
 };
 recuperationDonnees();
-
 
 const afficherOeuvres = (oeuvres) => {
   cards.innerHTML = ""; // Pour nettoyer chaque fois qu'on filtre
@@ -37,4 +63,3 @@ const afficherOeuvres = (oeuvres) => {
     cards.insertAdjacentHTML("beforeend", card);
   });
 };
-
