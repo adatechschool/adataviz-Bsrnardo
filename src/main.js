@@ -2,26 +2,8 @@ import { nettoyageTechnique } from "./utils.js";
 
 const cards = document.querySelector(".cards");
 
-// Ici va la data recuperée
+// Je dois créer un objet/array pour mettre les donées
 let toutesLesOeuvres = [];
-
-const afficherOeuvres = (oeuvres) => {
-  cards.innerHTML = ""; // Pour nettoyer chaque fois qu'on filtre
-
-  oeuvres.forEach((oeuvre) => {
-    const technique = nettoyageTechnique(oeuvre.technique, oeuvre.domaine);
-    const card = `
-      <div class="card">
-        <h3>${oeuvre.titre}</h3>
-        <p>${oeuvre.auteur}</p>
-        <p>${oeuvre.date_creation}</p>
-        <p>${oeuvre.domaine}</p>
-        <p>${technique}</p>
-      </div>
-    `;
-    cards.insertAdjacentHTML("beforeend", card);
-  });
-};
 
 const recuperationDonnees = async () => {
   try {
@@ -37,3 +19,22 @@ const recuperationDonnees = async () => {
   }
 };
 recuperationDonnees();
+
+
+const afficherOeuvres = (oeuvres) => {
+  cards.innerHTML = ""; // Pour nettoyer chaque fois qu'on filtre
+  oeuvres.forEach((oeuvre) => {
+    const technique = nettoyageTechnique(oeuvre.technique, oeuvre.domaine);
+    const card = `
+      <div class="card">
+        <h3>${oeuvre.titre}</h3>
+        <p>${oeuvre.auteur}</p>
+        <p>${oeuvre.date_creation}</p>
+        <p>${oeuvre.domaine}</p>
+        <p>${technique}</p>
+      </div>
+    `;
+    cards.insertAdjacentHTML("beforeend", card);
+  });
+};
+
