@@ -89,6 +89,10 @@ body {
   color: var(--lavender);
   padding: 1.5rem 2rem;
   box-shadow: var(--shadow);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
 }
 
 .filtres h2 {
@@ -98,6 +102,35 @@ body {
   font-weight: 400;
   letter-spacing: 0.03em;
   text-transform: uppercase;
+}
+
+.filtres select {
+  flex: 1;
+  max-width: 250px;
+  padding: 0.5rem 1rem;
+  background-color: var(--lavender);
+  color: var(--prussian);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.filtres select:focus {
+  outline: 0 !important;
+  border-color: var(--prussian) !important;
+}
+
+/* POUR L'ACCESIBILITE */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* ==========================
